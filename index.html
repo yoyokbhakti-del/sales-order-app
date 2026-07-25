@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#2563eb" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="SalesOrder" />
+    <title>Form Order Penjualan</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="icons/icon-192.png" />
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="app-header">
+        <div class="container header-inner">
+            <div class="logo">
+                <i class="fas fa-receipt"></i>
+                <h1>Sales<span>Order</span></h1>
+            </div>
+            <div class="header-actions">
+                <button id="themeToggle" class="btn-icon" title="Ganti Tema">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="container">
+
+        <!-- Tab Navigation -->
+        <div class="tab-nav">
+            <button class="tab-btn active" data-tab="orderForm">
+                <i class="fas fa-file-invoice"></i> Pesanan Baru
+            </button>
+            <button class="tab-btn" data-tab="orderHistory">
+                <i class="fas fa-clock-rotate"></i> Riwayat <span class="badge" id="historyBadge">0</span>
+            </button>
+        </div>
+
+        <!-- ---------- TAB 1: FORM PESANAN ---------- -->
+        <section id="orderForm" class="tab-content active">
+
+            <div class="card form-card">
+                <div class="card-header">
+                    <i class="fas fa-pen-to-square"></i>
+                    <h2>Data Pelanggan</h2>
+                </div>
+                <div class="card-body">
+
+                    <!-- Pengaturan WA Admin -->
+                    <div class="admin-wa-box">
+                        <h3><i class="fab fa-whatsapp"></i> Pengaturan WA Tujuan Admin</h3>
+                        <div class="admin-wa-grid">
+                            <div class="form-group">
+                                <label for="adminWANewInput">
+                                    <i class="fas fa-phone"></i> Tambah No. WA Tujuan
+                                </label>
+                                <input type="tel" id="adminWANewInput" placeholder="Contoh: 6281234567890" />
+                            </div>
+                            <button id="btnAddAdminWA" class="btn btn-primary btn-sm">
+                                <i class="fas fa-plus"></i> Simpan Nomor
+                            </button>
+                        </div>
+
+                        <div class="admin-wa-grid">
+                            <div class="form-group">
+                                <label for="adminWASelect">
+                                    <i class="fas fa-list"></i> Pilih WA Tujuan Aktif
+                                </label>
+                                <select id="adminWASelect">
+                                    <option value="">-- Belum ada nomor --</option>
+                                </select>
+                            </div>
+                            <button id="btnDeleteAdminWA" class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash-can"></i> Hapus Nomor
+                            </button>
+                        </div>
+                        <small class="form-hint">Nomor WA tujuan aktif akan dipakai saat kirim pesanan ke WhatsApp.</small>
+                    </div>
+
+                    <!-- Customer Tersimpan -->
+                    <div class="saved-customer-box">
+                        <h3><i class="fas fa-book-bookmark"></i> Customer Tersimpan</h3>
+                        <div class="saved-customer-grid">
+                            <div class="form-group">
+                                <label for="savedCustomerSelect">
+                                    <i class="fas fa-list"></i> Pilih Customer
+                                </label>
+                                <select id="savedCustomerSelect">
+                                    <option value="">-- Belum ada customer tersimpan --</option>
+                                </select>
+                            </div>
+                            <button id="btnSaveCustomer" class="btn btn-primary btn-sm">
+                                <i class="fas fa-user-plus"></i> Simpan Customer
+                            </button>
+                            <button id="btnDeleteCustomer" class="btn btn-danger btn-sm">
+                                <i class="fas fa-user-minus"></i> Hapus Customer
+                            </button>
+                        </div>
+                        <small class="form-hint">Pilih customer tersimpan untuk auto-fill nama, no. WA, dan alamat.</small>
+                    </div>
+
+                    <!-- Nama -->
+                    <div class="form-group">
+                        <label for="customerName">
+                            <i class="fas fa-user"></i> Nama Pelanggan <span class="required">*</span>
+                        </label>
+                        <input type="text" id="customerName" placeholder="Masukkan nama lengkap" required autocomplete="name" />
+                    </div>
+
+                    <!-- No WA -->
+                    <div class="form-group">
+                        <label for="customerWA">
+                            <i class="fab fa-whatsapp"></i> No. WhatsApp <span class="required">*</span>
+                        </label>
+                        <input type="tel" id="customerWA" placeholder="08xxxxxxxxxx" required autocomplete="tel" />
+                        <small class="form-hint">Gunakan format angka, contoh: 08123456789</small>
+                    </div>
+
+                    <!-- Alamat -->
+                    <div class="form-group">
+                        <label for="customerAddress">
+                            <i class="fas fa-location-dot"></i> Alamat Pengiriman <span class="required">*</span>
+                        </label>
+                        <textarea id="customerAddress" rows="3" placeholder="Masukkan alamat lengkap" required></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detail Pesanan -->
+            <div class="card form-card">
+                <div class="card-header">
+                    <i class="fas fa-cart-shopping"></i>
+                    <h2>Detail Pesanan</h2>
+                </div>
+                <div class="card-body">
+
+                    <!-- Detail Barang Style Baris -->
+                    <div class="detail-barang-panel">
+                        <h3><i class="fas fa-box-open"></i> Detail Barang</h3>
+                        <div id="orderItemsList" class="detail-items-list"></div>
+                        <button id="btnAddItem" class="btn btn-primary btn-sm btn-add-barang">
+                            <i class="fas fa-plus"></i> Tambah Barang
+                        </button>
+                    </div>
+
+                    <!-- Total Item -->
+                    <div class="calc-summary item-only-summary">
+                        <div class="calc-row total-row">
+                            <span>Total Item</span>
+                            <span id="displayTotalItems">0</span>
+                        </div>
+                    </div>
+
+                    <!-- Catatan -->
+                    <div class="form-group">
+                        <label for="orderNotes">
+                            <i class="fas fa-note-sticky"></i> Catatan Pesanan
+                        </label>
+                        <textarea id="orderNotes" rows="2" placeholder="Opsional: tambahkan catatan untuk pesanan"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tombol Aksi -->
+            <div class="action-buttons">
+                <button id="btnSimpan" class="btn btn-primary">
+                    <i class="fas fa-floppy-disk"></i> Simpan Pesanan
+                </button>
+                <button id="btnKirimWA" class="btn btn-success">
+                    <i class="fab fa-whatsapp"></i> Simpan &amp; Kirim via WhatsApp
+                </button>
+            </div>
+        </section>
+
+        <!-- ---------- TAB 2: RIWAYAT PESANAN ---------- -->
+        <section id="orderHistory" class="tab-content">
+
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-clock-rotate"></i>
+                    <h2>Riwayat Pesanan</h2>
+                    <button id="btnClearHistory" class="btn btn-sm btn-danger" title="Hapus Semua Riwayat">
+                        <i class="fas fa-trash-can"></i> Hapus Semua
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div id="historyList">
+                        <!-- akan diisi oleh JS -->
+                        <div class="empty-state">
+                            <i class="fas fa-inbox"></i>
+                            <p>Belum ada pesanan tersimpan.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="app-footer">
+        <div class="container">
+            <p>&copy; 2025 SalesOrder App &mdash; Dibuat dengan <i class="fas fa-heart" style="color: var(--danger);"></i></p>
+        </div>
+    </footer>
+
+    <!-- ===== TOAST CONTAINER ===== -->
+    <div id="toastContainer"></div>
+
+    <!-- ===== MODAL KONFIRMASI ===== -->
+    <div id="confirmModal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <i class="fas fa-triangle-exclamation"></i>
+                <h3>Konfirmasi</h3>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage">Apakah Anda yakin?</p>
+            </div>
+            <div class="modal-footer">
+                <button id="confirmCancel" class="btn btn-secondary">Batal</button>
+                <button id="confirmOk" class="btn btn-danger">Ya, Hapus</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
