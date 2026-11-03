@@ -1,9 +1,10 @@
-const CACHE_NAME = "sales-order-pwa-v2";
+const CACHE_NAME = "sales-order-pwa-v3";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./style.css",
   "./app.js",
+  "./sync.js",
   "./manifest.webmanifest",
   "./icons/icon-192.png",
   "./icons/icon-512.png"

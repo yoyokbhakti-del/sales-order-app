@@ -26,6 +26,9 @@
                 <h1>Sales<span>Order</span></h1>
             </div>
             <div class="header-actions">
+                <button id="syncBtn" class="btn-icon sync-local" title="Mode lokal. Ketuk untuk masuk dan sinkron." aria-label="Sinkronisasi">
+                    <i class="fas fa-cloud"></i>
+                </button>
                 <button id="themeToggle" class="btn-icon" title="Ganti Tema">
                     <i class="fas fa-moon"></i>
                 </button>
@@ -214,6 +217,32 @@
         </div>
     </footer>
 
+    <!-- ===== LOGIN SINKRONISASI ===== -->
+    <div id="authOverlay" class="modal-overlay">
+        <form id="authForm" class="modal-box auth-box" novalidate>
+            <div class="modal-header">
+                <i class="fas fa-cloud-arrow-up" style="color: var(--primary);"></i>
+                <h3>Masuk untuk sinkron</h3>
+            </div>
+            <div class="modal-body">
+                <p class="auth-desc">Riwayat pesanan, customer, dan nomor WA admin akan sama di PC dan iPhone.</p>
+                <div class="form-group">
+                    <label for="authEmail"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="authEmail" autocomplete="username" inputmode="email" autocapitalize="none" placeholder="nama@email.com" />
+                </div>
+                <div class="form-group">
+                    <label for="authPassword"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="authPassword" autocomplete="current-password" placeholder="Password" />
+                </div>
+                <p id="authError" class="auth-error" role="alert"></p>
+            </div>
+            <div class="modal-footer auth-footer">
+                <button type="button" id="authSkip" class="btn btn-secondary">Lewati</button>
+                <button type="submit" id="authSubmit" class="btn btn-primary">Masuk</button>
+            </div>
+        </form>
+    </div>
+
     <!-- ===== TOAST CONTAINER ===== -->
     <div id="toastContainer"></div>
 
@@ -234,7 +263,9 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="app.js"></script>
+    <script src="sync.js"></script>
 </body>
 </html>
 

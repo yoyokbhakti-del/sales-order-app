@@ -113,6 +113,20 @@ img{max-width:100%;display:block;}
 }
 .btn-icon:hover{background:var(--border);transform:rotate(15deg);}
 
+/* ---------- Sync button & Login ---------- */
+.header-actions{display:flex;align-items:center;gap:8px;}
+#syncBtn:hover{transform:none;}
+#syncBtn.sync-synced{color:var(--success);}
+#syncBtn.sync-syncing{color:var(--primary);}
+#syncBtn.sync-offline,#syncBtn.sync-local{color:var(--text-secondary);}
+#syncBtn.sync-error{color:var(--danger);}
+.auth-box{max-width:380px;}
+.auth-desc{font-size:.85rem;color:var(--text-secondary);margin-bottom:16px;}
+.auth-error{color:var(--danger);font-size:.85rem;font-weight:600;min-height:1.2em;}
+.auth-box .form-group:last-of-type{margin-bottom:8px;}
+.auth-footer .btn{flex:1;}
+.auth-box .modal-body input{font-size:1rem;}
+
 /* ---------- Tab Navigation ---------- */
 .tab-nav{
     display:flex;

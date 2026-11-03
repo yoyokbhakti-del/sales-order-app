@@ -603,8 +603,9 @@ function initTheme() {
     });
 }
 
-function showConfirm(message, onConfirm) {
+function showConfirm(message, onConfirm, okLabel = "Ya, Hapus") {
     confirmMessage.textContent = message;
+    confirmOk.textContent = okLabel;
     confirmModal.classList.add("active");
 
     const cleanup = () => {
