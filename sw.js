@@ -1,4 +1,4 @@
-const CACHE_NAME = "sales-order-pwa-v1";
+const CACHE_NAME = "sales-order-pwa-v2";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -33,17 +33,16 @@ self.addEventListener("fetch", (event) => {
   const request = event.request;
   if (request.method !== "GET") return;
 
+  // Network-first: selalu ambil versi terbaru, cache hanya sebagai cadangan offline
   event.respondWith(
-    caches.match(request).then((cached) => {
-      if (cached) return cached;
-
-      return fetch(request)
-        .then((response) => {
+    fetch(request)
+      .then((response) => {
+        if (response.ok && new URL(request.url).origin === self.location.origin) {
           const cloned = response.clone();
           caches.open(CACHE_NAME).then((cache) => cache.put(request, cloned));
-          return response;
-        })
-        .catch(() => caches.match("./index.html"));
-    })
+        }
+        return response;
+      })
+      .catch(() => caches.match(request).then((c) => c || caches.match("./index.html")))
   );
 });
